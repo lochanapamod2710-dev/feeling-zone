@@ -1,0 +1,32 @@
+{
+  "rules": {
+    "posts": {
+      ".read": true,
+      ".indexOn": ["timestamp", "likes"],
+      "$postId": {
+        ".write": "auth != null && ((!data.exists() && newData.hasChildren(['name','text','likes','timestamp','ownerUid']) && newData.child('ownerUid').val() == auth.uid) || (data.exists() && (data.child('ownerUid').val() == auth.uid || root.child('admins').child(auth.uid).val() == true)))",
+        ".validate": "newData.hasChildren(['name','text','likes','timestamp','ownerUid']) && newData.child('text').isString() && newData.child('text').val().length <= 500 && newData.child('name').isString() && newData.child('name').val().length <= 30 && newData.child('likes').isNumber() && newData.child('timestamp').isNumber() && newData.child('ownerUid').isString()",
+        "likes": {
+          ".write": "auth != null && data.parent().exists() && newData.isNumber() && newData.val() == data.val() + 1",
+          ".validate": "newData.isNumber() && newData.val() == data.val() + 1"
+        }
+      }
+    },
+    "chats": {
+      "$sessionId": {
+        ".read": false,
+        ".write": false,
+        "$messageId": {
+          ".read": "auth != null && auth.uid == $sessionId",
+          ".write": "auth != null && auth.uid == $sessionId"
+        }
+      }
+    },
+    "admins": {
+      "$uid": {
+        ".read": false,
+        ".write": false
+      }
+    }
+  }
+}

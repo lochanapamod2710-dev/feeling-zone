@@ -1,0 +1,28 @@
+{
+  "name": "feeling-zone",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "firebase": "^10.8.0",
+    "lucide-react": "^0.469.0",
+    "next": "14.2.5",
+    "react": "^18",
+    "react-dom": "^18",
+    "framer-motion": "^11.0.0",
+    "date-fns": "^3.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8",
+    "autoprefixer": "^10",
+    "@netlify/plugin-nextjs": "^5.11.0"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  }
+}
